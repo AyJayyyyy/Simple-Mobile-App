@@ -1,45 +1,54 @@
+// Import necessary components and libraries
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the Icon component
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 
+// Define the component
 const BreakfastScreen = () => {
   const navigation = useNavigation();
 
   // Sample data for images
   const images = [
-    { id: 1, title: '"Recipe Title 1"', uri: 'https://via.placeholder.com/150', },
-    { id: 2, title: '"Recipe Title 2"', uri: 'https://via.placeholder.com/150', },
-    { id: 3, title: '"Recipe Title 3"', uri: 'https://via.placeholder.com/150', },
-    { id: 4, title: '"Recipe Title 4"', uri: 'https://via.placeholder.com/150', },
-    { id: 5, title: '"Recipe Title 5"', uri: 'https://via.placeholder.com/150', },
-    { id: 6, title: '"Recipe Title 6"', uri: 'https://via.placeholder.com/150', },
-    { id: 7, title: '"Recipe Title 7"', uri: 'https://via.placeholder.com/150', },
-    { id: 8, title: '"Recipe Title 8"', uri: 'https://via.placeholder.com/150', },
+    { id: 1, title: 'Recipe Title 1', uri: 'https://via.placeholder.com/150' },
+    { id: 2, title: 'Recipe Title 2', uri: 'https://via.placeholder.com/150' },
+    { id: 3, title: 'Recipe Title 3', uri: 'https://via.placeholder.com/150' },
+    { id: 4, title: 'Recipe Title 4', uri: 'https://via.placeholder.com/150' },
+    { id: 5, title: 'Recipe Title 5', uri: 'https://via.placeholder.com/150' },
+    { id: 6, title: 'Recipe Title 6', uri: 'https://via.placeholder.com/150' },
+    { id: 7, title: 'Recipe Title 7', uri: 'https://via.placeholder.com/150' },
+    { id: 8, title: 'Recipe Title 8', uri: 'https://via.placeholder.com/150' },
   ];
 
+  // Return the component JSX
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
+        {/* ImageBackground for the top section */}
         <ImageBackground
           source={require('../assets/images/Breakfast.jpg')}
           style={styles.backgroundImage}
         >
+          {/* Back button */}
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
             <Icon name="arrow-left" size={20} color="white" />
           </TouchableOpacity>
+          {/* Overlay for text */}
           <View style={styles.overlay}>
             <Text style={styles.overlayText}>Breakfast</Text>
           </View>
         </ImageBackground>
       </View>
       <View style={styles.bottomSection}>
+        {/* ScrollView for the image items */}
         <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
-          <View style={styles.imageContainer}>
+          {/* Map through images and create TouchableOpacity for each */}
           {images.map((image) => (
-            <TouchableOpacity key={image.id} style={styles.imageItem}>
+            <TouchableOpacity key={image.id} style={styles.imageItem} onPress={() => navigation.navigate('Recipe')}>
               <View style={styles.imageWrapper}>
+                {/* ImageBackground for each image */}
                 <ImageBackground source={{ uri: image.uri }} style={styles.image}>
+                  {/* Overlay for image title */}
                   <View style={styles.overlayImage}>
                     <Text style={styles.overlayImageText}>{image.title}</Text>
                   </View>
@@ -47,14 +56,13 @@ const BreakfastScreen = () => {
               </View>
             </TouchableOpacity>
           ))}
-
-          </View>
         </ScrollView>
       </View>
     </View>
   );
 };
 
+// Define the component styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -66,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
     justifyContent: 'center',
-    position: 'relative', // Ensure the button is positioned relative to the image
+    position: 'relative',
   },
   backButton: {
     position: 'absolute',
@@ -99,8 +107,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 20,
     paddingHorizontal: 25,
-    marginTop: -20, // Adjust this value to control the overlap
-    paddingTop: 20, // Add padding to compensate for the negative margin
+    marginTop: -20,
+    paddingTop: 20,
   },
   scrollViewContent: {
     flexDirection: 'row',
@@ -109,13 +117,8 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     paddingTop: 9,
   },
-  imageContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
   imageItem: {
-    width: '48%', // Two columns layout
+    width: '48%',
     marginBottom: 20,
   },
   imageWrapper: {
@@ -148,5 +151,6 @@ const styles = StyleSheet.create({
   },
 });
 
+// Export the component as the default export
 export default BreakfastScreen;
 

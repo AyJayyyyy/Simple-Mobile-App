@@ -1,30 +1,45 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the Icon component
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome'; 
 import { useNavigation } from '@react-navigation/native';
 
 const RecipeScreen = () => {
   const navigation = useNavigation();
 
-
   return (
     <View style={styles.container}>
       <View style={styles.topSection}>
-        <ImageBackground
-          source={require('../assets/images/Snack.jpg')}
-          style={styles.backgroundImage}
-        >
+        <View style={styles.greyBackground}>
           <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
             <Icon name="arrow-left" size={20} color="white" />
           </TouchableOpacity>
+          <TouchableOpacity style={styles.editButton} onPress={() => navigation.navigate('EditRecipe')}>
+            <Icon name="edit" size={20} color="white" />
+          </TouchableOpacity>
           <View style={styles.overlay}>
-            <Text style={styles.overlayText}>Fetch Title</Text>
+            <Text style={styles.overlayText}>(Fetch Title)</Text>
           </View>
-        </ImageBackground>
+          <Text style={styles.greyText}>(Fetch Recipe Image Here)</Text>
+        </View>
       </View>
       <View style={styles.bottomSection}>
         <ScrollView contentContainerStyle={styles.scrollViewContent} showsVerticalScrollIndicator={false}>
-          
+          <View style={styles.previewOverlay}>
+            <Text style={styles.overlayText}>(Fetch Preview data here)</Text>
+          </View>
+          <View style={styles.ingredientsOverlay}>
+            <Text style={styles.overlayText}>Ingredients</Text>
+          </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.horizontalScrollView}>
+            {[1, 2, 3, 4, 5].map((index) => (
+              <View key={index} style={styles.greyBackgroundSquare}>
+                <Text style={styles.greyBackgroundText}>Fetch Ingredients here</Text>
+              </View>
+            ))}
+          </ScrollView>
+          <View style={styles.additionalSection}>
+            <Text style={styles.additionalSectionText}>(Fetch Procedure here)</Text>
+          </View>
         </ScrollView>
       </View>
     </View>
@@ -38,11 +53,12 @@ const styles = StyleSheet.create({
   topSection: {
     flex: 0.3,
   },
-  backgroundImage: {
+  greyBackground: {
+    backgroundColor: 'grey',
     flex: 1,
-    resizeMode: 'cover',
     justifyContent: 'center',
-    position: 'relative', // Ensure the button is positioned relative to the image
+    alignItems: 'center',
+    position: 'relative', 
   },
   backButton: {
     position: 'absolute',
@@ -50,7 +66,15 @@ const styles = StyleSheet.create({
     left: 25,
     backgroundColor: 'rgba(0, 0, 0, 0.8)',
     borderRadius: 20,
-    padding: 5,
+    padding: 10,
+  },
+  editButton: {
+    position: 'absolute',
+    top: 50,
+    right: 25,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: 20,
+    padding: 10,
   },
   overlay: {
     position: 'absolute',
@@ -68,6 +92,11 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+  greyText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
   bottomSection: {
     flex: 0.7,
     borderTopLeftRadius: 25,
@@ -75,52 +104,58 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingTop: 20,
     paddingHorizontal: 25,
-    marginTop: -20, // Adjust this value to control the overlap
-    paddingTop: 20, // Add padding to compensate for the negative margin
+    marginTop: -20, 
+    paddingTop: 20, 
   },
   scrollViewContent: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    paddingBottom: 20,
-    paddingTop: 9,
+    margin: 5,
+    paddingBottom: 20, 
   },
-  imageContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
-  },
-  imageItem: {
-    width: '48%', // Two columns layout
-    marginBottom: 20,
-  },
-  imageWrapper: {
+  previewOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    padding: 40,
+    height: 100,
     width: '100%',
-    height: 175,
-    borderRadius: 25,
-    overflow: 'hidden',
-    position: 'relative',
+    marginBottom: 10,
   },
-  image: {
-    width: '100%',
-    height: '100%',
-  },
-  overlayImage: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+  ingredientsOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     paddingVertical: 10,
-    paddingHorizontal: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    paddingHorizontal: 125,
+    borderRadius: 30,
+    marginBottom: 10,
   },
-  overlayImageText: {
+  horizontalScrollView: {
+    marginHorizontal: -4,
+  },
+  greyBackgroundSquare: {
+    backgroundColor: 'grey',
+    width: 120,
+    height: 120,
+    borderRadius: 30,
+    marginHorizontal: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  greyBackgroundText: {
     color: 'white',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  additionalSection: {
+    backgroundColor: '#08A045',
+    padding: 20,
+    height: 500,
+    marginTop: 20,
+    marginBottom: 10,
+  },
+  additionalSectionText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    
   },
 });
 

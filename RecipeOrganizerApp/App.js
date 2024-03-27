@@ -10,13 +10,14 @@ import DinnerScreen from './screens/DinnerScreen';
 import DessertsScreen from './screens/DessertsScreen';
 import AddRecipeScreen from './screens/AddRecipeScreen';
 import EditRecipeScreen from './screens/EditRecipeScreen';
+import RecipeScreen from './screens/RecipeScreen';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator initialRouteName="Recipe" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Splash" component={SplashScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="BreakfastScreen" component={BreakfastScreen} />
@@ -26,6 +27,7 @@ const App = () => {
         <Stack.Screen name="DessertsScreen" component={DessertsScreen} />
         <Stack.Screen name="AddRecipe" component={AddRecipeScreen} />
         <Stack.Screen name="EditRecipe" component={EditRecipeScreen} />
+        <Stack.Screen name="Recipe" component={RecipeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
